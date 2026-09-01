@@ -6,6 +6,7 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
+from src.utils.paths import MODELS
 
 
 class FlightPreprocessor:
@@ -72,7 +73,7 @@ class FlightPreprocessor:
 
         self.preprocessor = None
 
-        self.output_path = Path("models")
+        self.output_path = MODELS
 
         self.output_path.mkdir(
             parents=True,

@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import pandas as pd
 
 from sklearn.metrics import (
     accuracy_score,
@@ -112,38 +113,92 @@ class FlightModelEvaluator:
         )
 
     # =========================================================
-    # SAVE METRICS
-    # =========================================================
+# SAVE METRICS
+# =========================================================
 
-    def save_metrics(
-        self,
-        model_name,
-        accuracy,
-        precision,
-        recall,
-        f1,
-        roc_auc,
-        report
-    ):
+def save_metrics(
+    self,
+    model_name,
+    accuracy,
+    precision,
+    recall,
+    f1,
+    roc_auc,
+    report
+):
 
-        file = self.output_path / f"{model_name}_metrics.txt"
+    file_name = (
+        model_name
+        .lower()
+        .replace(" ", "_")
+    )
 
-        with open(file, "w") as f:
+    # -----------------------------------------------------
+    # SAVE CSV
+    # -----------------------------------------------------
 
-            f.write(f"Model : {model_name}\n\n")
+    metrics = pd.DataFrame({
 
-            f.write(f"Accuracy : {accuracy:.4f}\n")
-            f.write(f"Precision: {precision:.4f}\n")
-            f.write(f"Recall   : {recall:.4f}\n")
-            f.write(f"F1 Score : {f1:.4f}\n")
-            f.write(f"ROC AUC  : {roc_auc:.4f}\n\n")
+        "Metric": [
 
-            f.write("Classification Report\n")
-            f.write("=" * 60 + "\n")
-            f.write(report)
+            "Accuracy",
+            "Precision",
+            "Recall",
+            "F1 Score",
+            "ROC AUC"
 
-        print(f"Saved : {file}")
+        ],
 
+        "Value": [
+
+            accuracy,
+            precision,
+            recall,
+            f1,
+            roc_auc
+
+        ]
+
+    })
+
+    csv_file = (
+        self.output_path /
+        f"{file_name}_metrics.csv"
+    )
+
+    metrics.to_csv(
+        csv_file,
+        index=False
+    )
+
+    print(f"Saved : {csv_file}")
+
+    # -----------------------------------------------------
+    # SAVE TXT
+    # -----------------------------------------------------
+
+    txt_file = (
+        self.output_path /
+        f"{file_name}_metrics.txt"
+    )
+
+    with open(txt_file, "w") as f:
+
+        f.write(f"Model : {model_name}\n\n")
+
+        f.write(f"Accuracy : {accuracy:.4f}\n")
+        f.write(f"Precision: {precision:.4f}\n")
+        f.write(f"Recall   : {recall:.4f}\n")
+        f.write(f"F1 Score : {f1:.4f}\n")
+        f.write(f"ROC AUC  : {roc_auc:.4f}\n\n")
+
+        f.write("Classification Report\n")
+        f.write("=" * 60 + "\n")
+        f.write(report)
+
+    print(f"Saved : {txt_file}")
+
+    
     # =========================================================
     # CONFUSION MATRIX
     # =========================================================
@@ -162,9 +217,15 @@ class FlightModelEvaluator:
 
         plt.tight_layout()
 
+        file_name = (
+            model_name
+            .lower()
+            .replace(" ", "_")
+        )
+
         filename = (
             self.output_path /
-            f"{model_name}_confusion_matrix.png"
+            f"{file_name}_confusion_matrix.png"
         )
 
         plt.savefig(

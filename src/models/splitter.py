@@ -3,6 +3,8 @@ from pathlib import Path
 import joblib
 import pandas as pd
 
+from src.utils.constants import TEST_SIZE, RANDOM_STATE
+
 from scipy import sparse
 from sklearn.model_selection import train_test_split
 
@@ -17,8 +19,8 @@ class FlightDataSplitter:
         self,
         X,
         y,
-        test_size: float = 0.2,
-        random_state: int = 42
+        test_size: float = TEST_SIZE,
+        random_state: int = RANDOM_STATE
     ):
 
         self.X = X

@@ -1,0 +1,486 @@
+/* ==========================================================
+   FLIGHT DELAY PREDICTOR
+   DARK AEROSPACE THEME
+========================================================== */
+
+/* ==========================================================
+   ROOT COLORS
+========================================================== */
+
+:root{
+
+    --bg:#08121E;
+
+    --card:#101B2D;
+
+    --card-hover:#16263D;
+
+    --border:#22384E;
+
+    --primary:#4CC9FF;
+
+    --primary-hover:#74D8FF;
+
+    --success:#2ECC71;
+
+    --warning:#E8B04C;
+
+    --danger:#FF6B6B;
+
+    --text:#F8FAFC;
+
+    --muted:#9BAEC1;
+
+}
+
+/* ==========================================================
+   PAGE
+========================================================== */
+
+html,
+body,
+.stApp,
+[data-testid="stAppViewContainer"]{
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-family:"Segoe UI",sans-serif;
+
+}
+
+/* ==========================================================
+   MAIN
+========================================================== */
+
+.main{
+
+    padding-top:2rem;
+
+    padding-left:2rem;
+
+    padding-right:2rem;
+
+}
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+[data-testid="stSidebar"]{
+
+    background:#0C1828;
+
+    border-right:1px solid var(--border);
+
+}
+
+[data-testid="stSidebar"] *{
+
+    color:var(--text);
+
+}
+
+/* ==========================================================
+   HEADINGS
+========================================================== */
+
+h1{
+
+    color:var(--text);
+
+    font-size:2.6rem;
+
+    font-weight:700;
+
+}
+
+h2{
+
+    color:var(--text);
+
+    font-weight:700;
+
+}
+
+h3{
+
+    color:var(--text);
+
+    font-weight:600;
+
+}
+
+/* ==========================================================
+   PARAGRAPHS
+========================================================== */
+
+p{
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+}
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.hero{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:40px;
+
+    margin-bottom:35px;
+
+}
+
+.hero h1{
+
+    color:var(--primary);
+
+    margin-bottom:12px;
+
+}
+
+.hero p{
+
+    color:var(--muted);
+
+    font-size:18px;
+
+    max-width:850px;
+
+}
+
+/* ==========================================================
+   SECTION TITLE
+========================================================== */
+
+.section-header{
+
+    color:var(--primary);
+
+    font-size:28px;
+
+    font-weight:700;
+
+    margin-top:35px;
+
+    margin-bottom:20px;
+
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.stButton>button{
+
+    width:100%;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:#08121E;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.stButton>button:hover{
+
+    background:var(--primary-hover);
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================================
+   INPUTS
+========================================================== */
+
+.stTextInput input,
+.stNumberInput input,
+.stDateInput input,
+.stTimeInput input{
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border-radius:12px;
+
+}
+
+[data-baseweb="select"]{
+
+    border-radius:12px;
+
+}
+
+/* ==========================================================
+   METRICS
+========================================================== */
+
+[data-testid="metric-container"]{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:24px;
+
+    transition:.25s;
+
+}
+
+[data-testid="metric-container"]:hover{
+
+    border-color:var(--primary);
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================================
+   CUSTOM METRIC CARD
+========================================================== */
+
+.metric-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:28px;
+
+    text-align:center;
+
+    transition:.25s;
+
+}
+
+.metric-card:hover{
+
+    transform:translateY(-2px);
+
+    border-color:var(--primary);
+
+}
+
+.metric-title{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+}
+
+.metric-value{
+
+    color:var(--primary);
+
+    font-size:48px;
+
+    font-weight:700;
+
+    margin-top:12px;
+
+}
+
+/* ==========================================================
+   INFO CARD
+========================================================== */
+
+.info-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:24px;
+
+    margin-bottom:20px;
+
+    min-height:180px;
+
+    transition:.25s;
+
+}
+
+.info-card:hover{
+
+    border-color:var(--primary);
+
+}
+
+.info-label{
+
+    color:var(--muted);
+
+    font-size:14px;
+
+}
+
+.info-value{
+
+    color:var(--text);
+
+    font-size:22px;
+
+    margin-top:8px;
+
+}
+
+/* ==========================================================
+   STATUS CARD
+========================================================== */
+
+.status-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:24px;
+
+}
+
+/* ==========================================================
+   PROGRESS BAR
+========================================================== */
+
+.stProgress>div>div>div{
+
+    background:var(--primary);
+
+}
+
+/* ==========================================================
+   ALERTS
+========================================================== */
+
+.stSuccess,
+.stWarning,
+.stError{
+
+    border-radius:16px;
+
+}
+
+/* ==========================================================
+   TABLES
+========================================================== */
+
+table{
+
+    border-radius:12px;
+
+}
+
+/* ==========================================================
+   IMAGES
+========================================================== */
+
+img{
+
+    border-radius:18px;
+
+}
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+hr{
+
+    border-color:var(--border);
+
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:var(--bg);
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--border);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--primary);
+
+}
+
+/* ==========================================================
+   EXPANDERS
+========================================================== */
+
+.streamlit-expanderHeader{
+
+    color:var(--text);
+
+    font-weight:600;
+
+}
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+a{
+
+    color:var(--primary);
+
+}
+
+a:hover{
+
+    color:var(--primary-hover);
+
+}

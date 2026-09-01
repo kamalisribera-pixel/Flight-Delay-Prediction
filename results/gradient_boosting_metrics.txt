@@ -1,0 +1,18 @@
+Model : gradient_boosting
+
+Accuracy : 0.7993
+Precision: 0.6945
+Recall   : 0.0611
+F1 Score : 0.1124
+ROC AUC  : 0.5270
+
+Classification Report
+============================================================
+              precision    recall  f1-score   support
+
+         0.0       0.80      0.99      0.89     81950
+         1.0       0.69      0.06      0.11     21495
+
+    accuracy                           0.80    103445
+   macro avg       0.75      0.53      0.50    103445
+weighted avg       0.78      0.80      0.73    103445

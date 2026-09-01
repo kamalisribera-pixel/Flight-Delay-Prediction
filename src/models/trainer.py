@@ -1,7 +1,14 @@
 from pathlib import Path
+
 import joblib
 
 from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import (
+    RandomForestClassifier,
+    GradientBoostingClassifier
+)
+from src.utils.constants import RANDOM_STATE, CV_FOLDS
 
 
 class FlightModelTrainer:
@@ -40,7 +47,8 @@ class FlightModelTrainer:
 
         model = LogisticRegression(
             max_iter=1000,
-            random_state=42
+            random_state=RANDOM_STATE,
+            class_weight="balanced"
         )
 
         model.fit(
@@ -53,10 +61,106 @@ class FlightModelTrainer:
         print("Training Complete.")
 
     # =========================================================
+    # DECISION TREE
+    # =========================================================
+
+    def train_decision_tree(self):
+
+        print("=" * 60)
+        print("TRAINING DECISION TREE")
+        print("=" * 60)
+
+        model = DecisionTreeClassifier(
+            random_state=RANDOM_STATE
+        )
+
+        model.fit(
+            self.X_train,
+            self.y_train
+        )
+
+        self.models["decision_tree"] = model
+
+        print("Training Complete.")
+    
+
+    # =========================================================
+    # RANDOM FOREST
+    # =========================================================
+
+    def train_random_forest(self):
+
+        print("=" * 60)
+        print("TRAINING RANDOM FOREST")
+        print("=" * 60)
+
+        model = RandomForestClassifier(
+            n_estimators=100,
+            random_state=RANDOM_STATE,
+            n_jobs=-1
+        )
+
+        model.fit(
+            self.X_train,
+            self.y_train
+        )
+
+        self.models["random_forest"] = model
+
+        print("Training Complete.")
+
+
+    # =========================================================
+    # GRADIENT BOOSTING
+    # =========================================================
+
+    def train_gradient_boosting(self):
+
+        print("=" * 60)
+        print("TRAINING GRADIENT BOOSTING")
+        print("=" * 60)
+
+        model = GradientBoostingClassifier(
+            random_state=RANDOM_STATE
+        )
+
+        model.fit(
+            self.X_train,
+            self.y_train
+        )
+
+        self.models["gradient_boosting"] = model
+
+        print("Training Complete.")
+
+    # =========================================================
+    # LOAD MODELS
+    # =========================================================
+
+    def load_models(self):
+
+        return {
+            "logistic_regression": joblib.load(
+                "models/logistic_regression.joblib"
+            ),
+            "decision_tree": joblib.load(
+                "models/decision_tree.joblib"
+            ),
+            "random_forest": joblib.load(
+                "random_forest.joblib"
+            ),
+            "gradient_boosting": joblib.load(
+                "models/gradient_boosting.joblib"
+            )
+        }
+
+
+
+    # =========================================================
     # SAVE MODELS
     # =========================================================
 
-    def save_models(self):
+    def save(self):
 
         print("=" * 60)
         print("SAVING MODELS")
@@ -64,18 +168,14 @@ class FlightModelTrainer:
 
         for name, model in self.models.items():
 
-            filename = (
-                name.lower()
-                .replace(" ", "_")
-                + ".joblib"
-            )
+            path = self.output_path / f"{name}.joblib"
 
             joblib.dump(
                 model,
-                self.output_path / filename
+                path
             )
 
-            print(f"Saved : {filename}")
+            print(f"Saved : {path}")
 
     # =========================================================
     # RUN PIPELINE
@@ -85,6 +185,12 @@ class FlightModelTrainer:
 
         self.train_logistic_regression()
 
-        self.save_models()
+        self.train_decision_tree()
+
+        self.train_random_forest()
+
+        self.train_gradient_boosting()
+
+        self.save()
 
         return self.models
