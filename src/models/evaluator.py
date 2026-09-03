@@ -54,6 +54,9 @@ class FlightModelEvaluator:
         print(f"EVALUATING {model_name.upper()}")
         print("=" * 60)
 
+        if hasattr(model, "n_jobs"):
+            model.set_params(n_jobs=1)
+
         predictions = model.predict(self.X_test)
 
         accuracy = accuracy_score(
@@ -113,90 +116,90 @@ class FlightModelEvaluator:
         )
 
     # =========================================================
-# SAVE METRICS
-# =========================================================
+    # SAVE METRICS
+    # =========================================================
 
-def save_metrics(
-    self,
-    model_name,
-    accuracy,
-    precision,
-    recall,
-    f1,
-    roc_auc,
-    report
-):
+    def save_metrics(
+        self,
+        model_name,
+        accuracy,
+        precision,
+        recall,
+        f1,
+        roc_auc,
+        report
+    ):
 
-    file_name = (
-        model_name
-        .lower()
-        .replace(" ", "_")
-    )
+        file_name = (
+            model_name
+            .lower()
+            .replace(" ", "_")
+        )
 
-    # -----------------------------------------------------
-    # SAVE CSV
-    # -----------------------------------------------------
+        # -----------------------------------------------------
+        # SAVE CSV
+        # -----------------------------------------------------
 
-    metrics = pd.DataFrame({
+        metrics = pd.DataFrame({
 
-        "Metric": [
+            "Metric": [
 
-            "Accuracy",
-            "Precision",
-            "Recall",
-            "F1 Score",
-            "ROC AUC"
+                "Accuracy",
+                "Precision",
+                "Recall",
+                "F1 Score",
+                "ROC AUC"
 
-        ],
+            ],
 
-        "Value": [
+            "Value": [
 
-            accuracy,
-            precision,
-            recall,
-            f1,
-            roc_auc
+                accuracy,
+                precision,
+                recall,
+                f1,
+                roc_auc
 
-        ]
+            ]
 
-    })
+        })
 
-    csv_file = (
-        self.output_path /
-        f"{file_name}_metrics.csv"
-    )
+        csv_file = (
+            self.output_path /
+            f"{file_name}_metrics.csv"
+        )
 
-    metrics.to_csv(
-        csv_file,
-        index=False
-    )
+        metrics.to_csv(
+            csv_file,
+            index=False
+        )
 
-    print(f"Saved : {csv_file}")
+        print(f"Saved : {csv_file}")
 
-    # -----------------------------------------------------
-    # SAVE TXT
-    # -----------------------------------------------------
+        # -----------------------------------------------------
+        # SAVE TXT
+        # -----------------------------------------------------
 
-    txt_file = (
-        self.output_path /
-        f"{file_name}_metrics.txt"
-    )
+        txt_file = (
+            self.output_path /
+            f"{file_name}_metrics.txt"
+        )
 
-    with open(txt_file, "w") as f:
+        with open(txt_file, "w") as f:
 
-        f.write(f"Model : {model_name}\n\n")
+            f.write(f"Model : {model_name}\n\n")
 
-        f.write(f"Accuracy : {accuracy:.4f}\n")
-        f.write(f"Precision: {precision:.4f}\n")
-        f.write(f"Recall   : {recall:.4f}\n")
-        f.write(f"F1 Score : {f1:.4f}\n")
-        f.write(f"ROC AUC  : {roc_auc:.4f}\n\n")
+            f.write(f"Accuracy : {accuracy:.4f}\n")
+            f.write(f"Precision: {precision:.4f}\n")
+            f.write(f"Recall   : {recall:.4f}\n")
+            f.write(f"F1 Score : {f1:.4f}\n")
+            f.write(f"ROC AUC  : {roc_auc:.4f}\n\n")
 
-        f.write("Classification Report\n")
-        f.write("=" * 60 + "\n")
-        f.write(report)
+            f.write("Classification Report\n")
+            f.write("=" * 60 + "\n")
+            f.write(report)
 
-    print(f"Saved : {txt_file}")
+        print(f"Saved : {txt_file}")
 
     
     # =========================================================

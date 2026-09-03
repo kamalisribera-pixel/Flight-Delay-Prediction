@@ -1,0 +1,84 @@
+{
+    "completed": [
+        "{'C': 0.01, 'solver': 'lbfgs'}",
+        "{'C': 0.01, 'solver': 'liblinear'}",
+        "{'C': 0.1, 'solver': 'lbfgs'}",
+        "{'C': 0.1, 'solver': 'liblinear'}",
+        "{'C': 1, 'solver': 'lbfgs'}",
+        "{'C': 1, 'solver': 'liblinear'}",
+        "{'C': 10, 'solver': 'lbfgs'}",
+        "{'C': 10, 'solver': 'liblinear'}"
+    ],
+    "results": [
+        {
+            "params": {
+                "C": 0.01,
+                "solver": "lbfgs"
+            },
+            "score": 0.3901182528864756,
+            "time": 13.684540033340454
+        },
+        {
+            "params": {
+                "C": 0.01,
+                "solver": "liblinear"
+            },
+            "score": 0.3901848072738506,
+            "time": 21.73569941520691
+        },
+        {
+            "params": {
+                "C": 0.1,
+                "solver": "lbfgs"
+            },
+            "score": 0.3903956126204599,
+            "time": 27.254563331604004
+        },
+        {
+            "params": {
+                "C": 0.1,
+                "solver": "liblinear"
+            },
+            "score": 0.39054011620218565,
+            "time": 54.58705687522888
+        },
+        {
+            "params": {
+                "C": 1,
+                "solver": "lbfgs"
+            },
+            "score": 0.3904321650112402,
+            "time": 32.05286145210266
+        },
+        {
+            "params": {
+                "C": 1,
+                "solver": "liblinear"
+            },
+            "score": 0.390422544326414,
+            "time": 109.25301909446716
+        },
+        {
+            "params": {
+                "C": 10,
+                "solver": "lbfgs"
+            },
+            "score": 0.39017911042959763,
+            "time": 37.891709089279175
+        },
+        {
+            "params": {
+                "C": 10,
+                "solver": "liblinear"
+            },
+            "score": 0.39036413232151645,
+            "time": 155.83947658538818
+        }
+    ],
+    "best_score": 0.39054011620218565,
+    "best_params": {
+        "C": 0.1,
+        "solver": "liblinear"
+    },
+    "scoring_method": "5-fold cross-validation f1"
+}

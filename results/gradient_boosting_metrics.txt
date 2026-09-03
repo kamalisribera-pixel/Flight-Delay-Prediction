@@ -1,4 +1,4 @@
-Model : gradient_boosting
+Model : Gradient Boosting
 
 Accuracy : 0.7993
 Precision: 0.6945

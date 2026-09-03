@@ -70,7 +70,7 @@ st.markdown(
 <p>
 
 Predict whether a scheduled flight is likely to
-depart <strong>15 minutes or more</strong> behind schedule.
+arrive <strong>15 minutes or more</strong> late.
 
 The prediction is generated using a trained Random Forest
 model built from over 500,000 historical US domestic flights.
@@ -281,7 +281,7 @@ if prediction == 1:
 
     description = (
         "Historical flight patterns indicate a higher "
-        "probability of departure delay."
+        "probability of arrival delay."
     )
 
 else:
@@ -290,7 +290,7 @@ else:
 
     description = (
         "Based on historical data, the flight is expected "
-        "to depart on schedule."
+        "to arrive less than 15 minutes late."
     )
 
 st.markdown(

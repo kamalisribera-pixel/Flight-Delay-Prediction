@@ -6,7 +6,7 @@
 
 # 1. Abstract
 
-The Flight Delay Prediction System is an end-to-end Machine Learning application developed to predict whether a scheduled commercial flight will experience a departure delay of fifteen minutes or more. The project was built using historical flight data published by the United States Bureau of Transportation Statistics and combines data engineering, feature engineering, machine learning, database management, and web application development into a single integrated system.
+The Flight Delay Prediction System is an end-to-end Machine Learning application developed to predict whether a scheduled commercial flight will arrive fifteen minutes or more late. The project was built using historical flight data published by the United States Bureau of Transportation Statistics and combines data engineering, feature engineering, machine learning, database management, and web application development into a single integrated system.
 
 Unlike projects that focus only on training a predictive model, this work was designed to simulate the workflow of a complete Machine Learning application. The project includes dataset validation, automated data cleaning, exploratory data analysis, feature engineering, preprocessing, model training, hyperparameter optimization, model evaluation, prediction services, SQLite database integration, and an interactive Streamlit dashboard.
 
@@ -33,7 +33,7 @@ Beyond the technical implementation, this project also served as an opportunity 
 
 Flight delays are influenced by multiple factors including airline operations, airport characteristics, scheduled departure time, route information, and historical patterns. Because these factors interact in complex ways, manually estimating whether a flight will be delayed can be difficult.
 
-The objective of this project is to develop a Machine Learning system capable of predicting whether a scheduled flight will experience a departure delay of fifteen minutes or more.
+The objective of this project is to develop a Machine Learning system capable of predicting whether a scheduled flight will arrive fifteen minutes or more late.
 
 The challenge is not only building a predictive model but also designing a complete system that can:
 
@@ -142,15 +142,15 @@ The objective of the system is a binary classification task.
 The target variable is:
 
 ```
-DEP_DEL15
+ARR_DEL15
 ```
 
-The variable represents whether a flight departure delay is:
+The variable represents whether a flight arrival delay is:
 
 | Value | Meaning |
 |---|---|
-| 0 | Flight departed on time |
-| 1 | Flight delayed by 15 minutes or more |
+| 0 | Flight arrived less than 15 minutes late |
+| 1 | Flight arrived 15 minutes or more late |
 
 The threshold of 15 minutes was selected because it is the standard delay classification used by aviation reporting systems.
 
@@ -162,7 +162,7 @@ Before model development, several preprocessing steps were performed to improve 
 
 ## Removing Cancelled Flights
 
-Cancelled flights were removed because they do not represent normal departure delay prediction scenarios.
+Cancelled flights were removed because they do not represent normal arrival-delay prediction scenarios.
 
 A cancelled flight does not experience a delay in the same way as an operating flight. Including these records could introduce misleading patterns into the model.
 
@@ -172,7 +172,7 @@ A cancelled flight does not experience a delay in the same way as an operating f
 
 Diverted flights were excluded because diversion events represent exceptional operational situations that are different from normal delay prediction.
 
-The objective of this project was to predict standard departure delays before flight operation.
+The objective of this project was to predict arrival-delay risk before flight operation.
 
 ---
 
@@ -731,9 +731,7 @@ FDP/
 │
 ├── reports/
 │
-├── results/
-│
-└── tests/
+└── results/
 ```
 
 Each directory has a specific role in the overall system.
@@ -1117,7 +1115,7 @@ This separation makes future improvements easier, such as replacing SQLite with 
 
 The Flight Delay Prediction System was formulated as a supervised binary classification problem.
 
-The objective was to predict whether a flight would experience a departure delay of 15 minutes or more.
+The objective was to predict whether a flight would arrive 15 minutes or more late.
 
 The target classes were:
 
@@ -1614,9 +1612,33 @@ app/
     └── 5_About.py
 ```
 
+# 9.4 Application Screenshots
+
+The following screenshots show the main views of the Streamlit application.
+
+### Home Page
+
+![Flight Delay Prediction home page](images/home.png)
+
+### Prediction Page
+
+![Flight delay prediction form](images/prediction.png)
+
+### Prediction History
+
+![Prediction history page](images/history.png)
+
+### Model Performance
+
+![Model performance dashboard](images/performance.png)
+
+### About Page
+
+![About page](images/about.png)
+
 ---
 
-# 9.4 Home Page
+# 9.5 Home Page
 
 The Home page provides an overview of the system.
 
@@ -1632,7 +1654,7 @@ The purpose of this page is to help users understand the application before inte
 
 ---
 
-# 9.5 Prediction Page
+# 9.6 Prediction Page
 
 The Prediction page is the main functionality of the application.
 
@@ -1692,7 +1714,7 @@ Result Display
 
 ---
 
-# 9.6 Prediction Service
+# 9.7 Prediction Service
 
 The prediction logic was separated from the Streamlit interface.
 
@@ -1768,7 +1790,7 @@ Handles:
 
 ---
 
-# 9.7 Prediction Output
+# 9.8 Prediction Output
 
 The application provides:
 
@@ -1812,7 +1834,7 @@ Flight Likely On Time
 
 ---
 
-# 9.8 Database Integration
+# 9.9 Database Integration
 
 SQLite was selected as the database system.
 
@@ -1843,7 +1865,7 @@ The prediction table contains:
 
 ---
 
-# 9.9 Why SQLite Was Selected
+# 9.10 Why SQLite Was Selected
 
 SQLite was chosen because:
 
@@ -1860,7 +1882,7 @@ For larger production systems, this could be replaced with:
 
 ---
 
-# 9.10 Prediction History
+# 9.11 Prediction History
 
 The History page retrieves previous predictions from SQLite.
 
@@ -1875,7 +1897,7 @@ This feature demonstrates database persistence.
 
 ---
 
-# 9.11 Model Performance Dashboard
+# 9.12 Model Performance Dashboard
 
 The Model Performance page provides transparency into model behavior.
 
@@ -1892,7 +1914,7 @@ The purpose of this page is to show how different models performed before select
 
 ---
 
-# 9.12 Error Handling
+# 9.13 Error Handling
 
 The application includes validation and error handling.
 
@@ -1928,7 +1950,7 @@ Avoid unnecessary repeated loading and improve application performance.
 
 ---
 
-# 9.13 Deployment Considerations
+# 9.14 Deployment Considerations
 
 The current system is designed as a local Machine Learning application.
 
@@ -1964,7 +1986,7 @@ A future version could replace Streamlit prediction calls with an API service us
 
 ---
 
-# 9.14 Engineering Decisions
+# 9.15 Engineering Decisions
 
 ## Decision 1: Separate UI and ML Logic
 

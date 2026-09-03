@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import streamlit as st
 
 # =========================================================
@@ -9,6 +11,28 @@ st.set_page_config(
     page_icon="ℹ️",
     layout="wide"
 )
+
+# =========================================================
+# LOAD CSS
+# =========================================================
+
+def load_css():
+
+    css_file = (
+        Path(__file__).resolve().parents[1]
+        / "assets"
+        / "style.css"
+    )
+
+    with open(css_file, encoding="utf-8") as f:
+
+        st.markdown(
+            f"<style>{f.read()}</style>",
+            unsafe_allow_html=True
+        )
+
+
+load_css()
 
 # =========================================================
 # HEADER
@@ -68,22 +92,36 @@ Data Cleaning
 Feature Engineering
       │
       ▼
-EDA & Statistics
-      │
-      ▼
 Preprocessing
       │
       ▼
-Model Training
+Train / Test Split
       │
       ▼
-Hyperparameter Optimization
-      │
-      ▼
-Model Evaluation
-      │
-      ▼
-Prediction Dashboard
+ ┌──────────────┬──────────────┬──────────────┬
+ │              │              │              │
+ ▼              ▼              ▼              ▼
+Logistic     Decision      Random        Gradient
+Regression     Tree         Forest        Boosting
+ │              │              │              │
+ └──────────────┴──────────────┴──────────────┘
+                    │
+                    ▼
+            Model Evaluation
+                    │
+                    ▼
+      Best Model Selection
+                    │
+                    ▼
+         Random Forest Model
+                    │
+      ┌─────────────┴─────────────┐
+      ▼                           ▼
+SQLite Database           Streamlit App
+      │                           │
+      └─────────────┬─────────────┘
+                    ▼
+             Flight Delay Prediction
 """)
 
 st.divider()
@@ -193,8 +231,7 @@ FDP/
 ├── database/
 ├── data/
 ├── reports/
-├── results/
-└── tests/
+└── results/
 """)
 
 st.divider()

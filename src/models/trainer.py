@@ -97,7 +97,7 @@ class FlightModelTrainer:
         model = RandomForestClassifier(
             n_estimators=100,
             random_state=RANDOM_STATE,
-            n_jobs=-1
+            n_jobs=1
         )
 
         model.fit(
@@ -140,18 +140,26 @@ class FlightModelTrainer:
     def load_models(self):
 
         return {
-            "logistic_regression": joblib.load(
-                "models/logistic_regression.joblib"
+
+            "Logistic Regression": joblib.load(
+                "models/Logistic Regression.joblib"
             ),
-            "decision_tree": joblib.load(
+
+
+            "Decision Tree": joblib.load(
                 "models/decision_tree.joblib"
             ),
-            "random_forest": joblib.load(
-                "random_forest.joblib"
+
+
+            "Random Forest": joblib.load(
+                "models/random_forest.joblib"
             ),
-            "gradient_boosting": joblib.load(
+
+
+            "Gradient Boosting": joblib.load(
                 "models/gradient_boosting.joblib"
             )
+
         }
 
 

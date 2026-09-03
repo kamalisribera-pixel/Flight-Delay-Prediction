@@ -1,71 +1,56 @@
-# ✈ Flight Delay Prediction
+# Flight Delay Prediction
 
-A Machine Learning application that predicts whether a flight will arrive **15 minutes or more late** using historical U.S. domestic flight data.
+A machine learning application that predicts whether a scheduled U.S. domestic flight is likely to arrive 15 minutes or more late.
 
-The project includes a complete end-to-end machine learning pipeline, from data preprocessing and feature engineering to model training, evaluation, database integration, and real-time prediction through a Streamlit web application.
+The project includes an end-to-end pipeline for data validation, cleaning, feature engineering, preprocessing, model training, hyperparameter optimization, evaluation, SQLite persistence, and prediction through a Streamlit web application.
 
----
-
-# Features
+## Features
 
 - Data validation and profiling
-- Data cleaning pipeline
-- Feature engineering
-- Exploratory Data Analysis (EDA)
-- Statistical analysis
-- Data preprocessing
-- Train-test splitting
-- Multiple machine learning models
-    - Logistic Regression
-    - Decision Tree
-    - Random Forest
-    - Gradient Boosting
-- Hyperparameter optimization
-- Model evaluation
-- SQLite database integration
-- Real-time prediction service
-- Streamlit web interface
+- Data cleaning for cancelled, diverted, duplicate, and missing records
+- Feature engineering for route, schedule, time, airport, and distance fields
+- Exploratory and statistical analysis
+- Sparse preprocessing with scaling and one-hot encoding
+- Train/test splitting
+- Multiple supervised classification models
+- Checkpoint-based hyperparameter optimization
+- Model evaluation reports and confusion matrices
+- SQLite-backed prediction history
+- Streamlit prediction dashboard
 
----
+## Dataset
 
-# Dataset
+The project uses historical U.S. domestic flight data from the Bureau of Transportation Statistics On-Time Performance dataset.
 
-Dataset:
+The prediction target is:
 
-**U.S. Department of Transportation - On-Time Performance Reporting**
-
-Target Variable
-
-```
+```text
 ARR_DEL15
 ```
 
-- 0 → Flight arrived on time
-- 1 → Flight delayed by 15 minutes or more
+`ARR_DEL15` indicates whether a flight arrived 15 minutes or more late.
 
----
+| Value | Meaning |
+|---:|---|
+| 0 | Flight arrived less than 15 minutes late |
+| 1 | Flight arrived 15 minutes or more late |
 
-# Project Structure
+## Project Structure
 
 ```text
-FDP
-│
+FDP/
 ├── app/
+│   ├── assets/
+│   └── pages/
 ├── data/
-│   ├── raw/
 │   ├── processed/
-│   └── reference/
-│
+│   └── raw/
 ├── database/
-│
+├── docs/
 ├── models/
-│
 ├── reports/
-│
 ├── results/
-│
-├── sql/
-│
+├── scripts/
 ├── src/
 │   ├── analysis/
 │   ├── data/
@@ -74,502 +59,104 @@ FDP
 │   ├── inference/
 │   ├── models/
 │   └── utils/
-│
-├── tests/
-│
 ├── main.py
 ├── README.md
 └── requirements.txt
 ```
 
----
+## Machine Learning Pipeline
 
-# Machine Learning Pipeline
-
-```
-Raw Dataset
-      ↓
-Data Validation
-      ↓
-Data Profiling
-      ↓
-Data Cleaning
-      ↓
-Feature Engineering
-      ↓
-EDA + Statistics
-      ↓
-Preprocessing
-      ↓
-Train/Test Split
-      ↓
-Model Training
-      ↓
-Hyperparameter Optimization
-      ↓
-Model Evaluation
-      ↓
-Model Deployment
-      ↓
-Streamlit Application
+```text
+Raw dataset
+  -> Data validation
+  -> Data profiling
+  -> Data cleaning
+  -> Feature engineering
+  -> Preprocessing
+  -> Train/test split
+  -> Model training
+  -> Hyperparameter optimization
+  -> Model evaluation
+  -> Streamlit application
 ```
 
----
+## Models
 
-# Models
-
-The project trains multiple supervised learning models.
+The training pipeline builds and evaluates:
 
 - Logistic Regression
 - Decision Tree
 - Random Forest
 - Gradient Boosting
 
-Each model is evaluated using:
+Evaluation includes accuracy, precision, recall, F1 score, ROC AUC, classification reports, and confusion matrices.
 
-- Accuracy
-- Precision
-- Recall
-- F1 Score
-- ROC AUC
-- Confusion Matrix
+## Application Screenshots
 
----
+### Home
 
-# Feature Engineering
+![Flight Delay Prediction home page](docs/images/home.png)
 
-Examples of engineered features include:
+### Prediction
 
-- Departure Hour
-- Route Distance
-- Distance Group
-- Day of Week
-- Day of Month
-- Departure Time Block
-- Arrival Time Block
-- Airline
-- Origin Airport
-- Destination Airport
+![Flight delay prediction form](docs/images/prediction.png)
 
----
+### Prediction History
 
-# Database
+![Prediction history page](docs/images/history.png)
 
-SQLite is used to store
+### Model Performance
 
-- Airport information
-- Route information
-- Airline information
-- Prediction history
+![Model performance dashboard](docs/images/performance.png)
 
----
+### About
 
-# Technologies Used
+![About page](docs/images/about.png)
 
-## Programming Language
+## Installation
 
-- Python
-
-## Data Processing
-
-- Pandas
-- NumPy
-
-## Machine Learning
-
-- Scikit-learn
-
-## Visualization
-
-- Matplotlib
-
-## Database
-
-- SQLite
-
-## Model Persistence
-
-- Joblib
-
-## Web Application
-
-- Streamlit
-
----
-
-# Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/kamalisribera-pixel/Flight-Delay-Prediction
-```
-
-Move into the project
-
-```bash
-cd Flight-Delay-Prediction
-```
-
-Install dependencies
+Install the Python dependencies from the project root:
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+## Usage
 
-# Running the Training Pipeline
+Run the complete pipeline:
 
 ```bash
 python main.py
 ```
 
----
+Run individual stages:
 
-# Running the Streamlit App
+```bash
+python scripts/preprocess.py
+python scripts/train.py
+python scripts/optimize.py
+python scripts/evaluate.py
+python scripts/build_database.py
+```
+
+Run the Streamlit app:
 
 ```bash
 streamlit run app/streamlit_app.py
 ```
 
----
-
-# Results
-
-Model evaluation reports are stored in
-
-```
-results/
-```
-
-Reports include
-
-- Metrics
-- Confusion Matrix
-- Model Performance
-
----
-
-# Future Improvements
-
-- XGBoost
-- LightGBM
-- CatBoost
-- Explainable AI using SHAP
-- REST API
-- Docker deployment
-- Cloud deployment
-- Flight tracking API int# ✈️ Flight Delay Prediction System
-
-> An end-to-end Machine Learning system that predicts whether a scheduled commercial flight will experience a departure delay of **15 minutes or more** using historical U.S. flight data.
-
----
-
-# 📖 Overview
-
-The **Flight Delay Prediction System** is a production-style Machine Learning project that demonstrates the complete lifecycle of an ML application—from raw data preprocessing to an interactive prediction dashboard.
-
-The project combines **Data Engineering, Feature Engineering, Machine Learning, Hyperparameter Optimization, Database Integration, and Web Application Development** into a single modular system.
-
-Rather than focusing solely on model accuracy, the objective of this project was to build a complete, maintainable, and scalable Machine Learning solution that closely resembles an industry workflow.
-
----
-
-# ✨ Features
-
-- ✈️ Flight Delay Prediction
-- 📊 Delay Probability Estimation
-- 📈 Model Performance Dashboard
-- 📜 Prediction History
-- 💾 SQLite Database Integration
-- ⚙️ Automated Feature Engineering
-- 🤖 Multiple Machine Learning Models
-- 🎯 Hyperparameter Optimization
-- 🌌 Aerospace Inspired User Interface
-
----
-
-# 🏗️ System Architecture
-
-> *(Architecture diagram will be added here.)*
-
-```text
-Dataset
-   │
-   ▼
-Data Validation
-   │
-   ▼
-Data Cleaning
-   │
-   ▼
-Feature Engineering
-   │
-   ▼
-Data Preprocessing
-   │
-   ▼
-Model Training
-   │
-   ▼
-Model Evaluation
-   │
-   ▼
-Prediction Service
-   │
-   ▼
-SQLite Database
-   │
-   ▼
-Streamlit Dashboard
-```
-
----
-
-# 📸 Application Screenshots
-
-> Screenshots will be added after deployment.
-
-- 🏠 Home Dashboard
-- ✈️ Flight Prediction
-- 📜 Prediction History
-- 📊 Model Performance
-- ℹ️ About Page
-
----
-
-# ⚙️ Machine Learning Pipeline
-
-## 1. Data Validation
-
-- Dataset validation
-- Missing value detection
-- Duplicate detection
-- Schema validation
-
----
-
-## 2. Data Cleaning
-
-- Removed cancelled flights
-- Removed diverted flights
-- Missing value handling
-- Duplicate removal
-
----
-
-## 3. Feature Engineering
-
-- Temporal Features
-- Airport Features
-- Route Features
-- Distance Features
-
----
-
-## 4. Data Preprocessing
-
-- ColumnTransformer
-- OneHotEncoder
-- StandardScaler
-- Train/Test Split
-
----
-
-## 5. Model Training
-
-The following Machine Learning models were trained and evaluated.
-
-- Logistic Regression
-- Decision Tree
-- Random Forest
-- Gradient Boosting
-
----
-
-## 6. Hyperparameter Optimization
-
-- RandomizedSearchCV
-- Cross Validation
-- Best Parameter Selection
-
----
-
-## 7. Model Evaluation
-
-Models were evaluated using:
-
-- Accuracy
-- Precision
-- Recall
-- F1 Score
-- ROC-AUC Score
-- Confusion Matrix
-
----
-
-# 📂 Dataset
-
-### Source
-
-U.S. Bureau of Transportation Statistics (BTS)
-
-### Dataset Size
-
-- **517,222 Flights**
-
-### Prediction Target
-
-Whether a scheduled flight will be delayed by **15 minutes or more**.
-
----
-
-# 🛠️ Technology Stack
-
-## Programming Languages
-
-- Python
-- SQL
-
----
-
-## Libraries
-
-- Pandas
-- NumPy
-- Scikit-Learn
-- Matplotlib
-
----
-
-## Framework
-
-- Streamlit
-
----
-
-## Database
-
-- SQLite
-
----
-
-## Model Serialization
-
-- Joblib
-
----
-
-# 📁 Project Structure
-
-```text
-FDP/
-
-├── app/
-│   ├── assets/
-│   └── pages/
-│
-├── src/
-│   ├── analysis/
-│   ├── data/
-│   ├── database/
-│   ├── features/
-│   ├── inference/
-│   ├── models/
-│   ├── utils/
-│   └── visualization/
-│
-├── data/
-│   ├── raw/
-│   └── processed/
-│
-├── database/
-├── docs/
-├── models/
-├── reports/
-├── results/
-├── scripts/
-├── tests/
-│
-├── README.md
-├── requirements.txt
-└── main.py
-```
-
----
-
-# 🚀 Installation
-
-## Clone Repository
-
-```bash
-git clone https://github.com/yourusername/Flight-Delay-Prediction.git
-```
-
----
-
-## Navigate to Project
-
-```bash
-cd Flight-Delay-Prediction
-```
-
----
-
-## Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Run Application
-
-```bash
-streamlit run app/streamlit_app.py
-```
-
----
-
-# 🎯 Future Improvements
-
-- REST API using FastAPI
-- Docker Containerization
-- Cloud Deployment
-- Real-Time Flight API Integration
-- Explainable AI (SHAP)
-- Deep Learning Models
-- Live Flight Tracking
-
----
-
-# 👨‍💻 Author
-
-**Lucky KB**
-
-AI Engineering • Machine Learning • Software Engineering
-
----
-
-# 📜 License
-
-This project is released under the **MIT License**.
-
----
-
-# ⭐ Acknowledgements
-
-- U.S. Bureau of Transportation Statistics
-- Scikit-Learn
-- Streamlit
-- Pandas
-- NumPy
-- Matplotlib
-
----
-
-# License
-
-This project is licensed under the MIT License.
+## Outputs
+
+- Trained models are saved in `models/`.
+- Optimized model checkpoints and summaries are saved in `results/`.
+- Evaluation metrics and confusion matrices are saved in `results/`.
+- Prediction history is stored in `database/flight_delay.db`.
+
+## Future Improvements
+
+- Add automated tests
+- Add REST API support with FastAPI
+- Add Docker deployment
+- Add weather and live flight data
+- Add explainability with SHAP
+- Compare additional models such as XGBoost, LightGBM, and CatBoost

@@ -1,4 +1,4 @@
-from datetime import datetime, time
+from datetime import datetime
 
 import pandas as pd
 
@@ -83,8 +83,6 @@ class FlightFeatureBuilder:
         # -----------------------------------------
         # DATE FEATURES
         # -----------------------------------------
-        print(type(departure_date))
-        print(departure_date)
         if isinstance(departure_date, str):
 
             travel_date = datetime.strptime(
@@ -192,6 +190,12 @@ class FlightFeatureBuilder:
 
         })
 
-        print(features)
-
         return features
+
+    # =========================================================
+    # CLOSE
+    # =========================================================
+
+    def close(self):
+
+        self.db.close()

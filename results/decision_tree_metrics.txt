@@ -1,4 +1,4 @@
-Model : decision_tree
+Model : Decision Tree
 
 Accuracy : 0.7510
 Precision: 0.4032

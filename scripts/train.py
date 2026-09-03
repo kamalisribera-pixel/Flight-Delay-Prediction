@@ -3,6 +3,13 @@ from pathlib import Path
 import pandas as pd
 from scipy.sparse import load_npz
 
+try:
+    from ._bootstrap import ensure_project_root_on_path
+except ImportError:
+    from _bootstrap import ensure_project_root_on_path
+
+ensure_project_root_on_path()
+
 from src.models.trainer import FlightModelTrainer
 
 # =========================================================

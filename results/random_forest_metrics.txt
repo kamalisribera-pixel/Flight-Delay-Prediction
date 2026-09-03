@@ -1,4 +1,4 @@
-Model : random_forest
+Model : Random Forest
 
 Accuracy : 0.7766
 Precision: 0.4299

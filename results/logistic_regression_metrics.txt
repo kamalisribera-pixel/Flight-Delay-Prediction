@@ -1,0 +1,18 @@
+Model : Logistic Regression
+
+Accuracy : 0.6125
+Precision: 0.2912
+Recall   : 0.6031
+F1 Score : 0.3928
+ROC AUC  : 0.6091
+
+Classification Report
+============================================================
+              precision    recall  f1-score   support
+
+         0.0       0.86      0.61      0.72     81950
+         1.0       0.29      0.60      0.39     21495
+
+    accuracy                           0.61    103445
+   macro avg       0.57      0.61      0.55    103445
+weighted avg       0.74      0.61      0.65    103445

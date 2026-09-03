@@ -194,7 +194,7 @@ p{
 
     background:var(--primary);
 
-    color:#08121E;
+    color:#08121E !important;
 
     font-size:16px;
 
@@ -212,6 +212,40 @@ p{
 
 }
 
+.stButton>button p,
+.stButton>button span{
+
+    color:#08121E !important;
+
+}
+
+.stDownloadButton>button{
+
+    width:100%;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--primary) !important;
+
+    color:#08121E !important;
+
+    font-size:16px;
+
+    font-weight:700;
+
+}
+
+.stDownloadButton>button p,
+.stDownloadButton>button span{
+
+    color:#08121E !important;
+
+}
+
 /* ==========================================================
    INPUTS
 ========================================================== */
@@ -221,9 +255,9 @@ p{
 .stDateInput input,
 .stTimeInput input{
 
-    background:var(--card);
+    background:var(--card) !important;
 
-    color:var(--text);
+    color:var(--text) !important;
 
     border-radius:12px;
 
@@ -231,7 +265,141 @@ p{
 
 [data-baseweb="select"]{
 
+    background:var(--card) !important;
+
     border-radius:12px;
+
+}
+
+[data-baseweb="select"] > div,
+[data-baseweb="input"] > div{
+
+    background:var(--card) !important;
+
+    border-color:var(--border) !important;
+
+}
+
+[data-baseweb="select"] span,
+[data-baseweb="select"] svg,
+[data-baseweb="input"] input{
+
+    color:var(--text) !important;
+
+    fill:var(--text) !important;
+
+}
+
+[data-testid="stSelectbox"] .react-aria-ComboBox > div,
+[data-testid="stDateInputField"],
+[data-testid="stTimeInputTimeDisplay"]{
+
+    background-color:var(--card) !important;
+
+    border-color:var(--border) !important;
+
+}
+
+[data-testid="stSelectbox"] input,
+[data-testid="stDateInputField"] *,
+[data-testid="stTimeInputTimeDisplay"] *{
+
+    color:var(--text) !important;
+
+}
+
+[data-testid="stDataFrame"] .stDataFrameGlideDataEditor{
+
+    --gdg-text-dark:var(--text) !important;
+
+    --gdg-text-medium:var(--muted) !important;
+
+    --gdg-text-light:var(--muted) !important;
+
+    --gdg-text-header:var(--muted) !important;
+
+    --gdg-bg-cell:var(--card) !important;
+
+    --gdg-bg-cell-medium:var(--card) !important;
+
+    --gdg-bg-header:var(--card-hover) !important;
+
+    --gdg-bg-header-hovered:var(--border) !important;
+
+    --gdg-border-color:var(--border) !important;
+
+    --gdg-horizontal-border-color:var(--border) !important;
+
+}
+
+[data-testid="stTable"]{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+}
+
+[data-testid="stTable"] table{
+
+    background:var(--card);
+
+    color:var(--text);
+
+}
+
+[data-testid="stTable"] th{
+
+    background:var(--card-hover) !important;
+
+    color:var(--text) !important;
+
+}
+
+[data-testid="stTable"] td{
+
+    background:var(--card) !important;
+
+    color:var(--text) !important;
+
+    border-color:var(--border) !important;
+
+}
+
+html body [data-testid="stDateInputCalendar"],
+html body [data-testid="stDateInputCalendar"] > div,
+html body [data-testid="stDateInputCalendar"] [role="application"]{
+
+    background-color:var(--card) !important;
+
+    background-image:none !important;
+
+    color:var(--text) !important;
+
+}
+
+[data-testid="stDateInputCalendar"] button,
+[data-testid="stDateInputCalendar"] [role="gridcell"]{
+
+    color:var(--text) !important;
+
+}
+
+[data-testid="stDateInputCalendar"] svg{
+
+    fill:var(--text) !important;
+
+}
+
+[data-testid="stDateInputCalendar"] [aria-disabled="true"]{
+
+    color:var(--muted) !important;
+
+    opacity:.55;
 
 }
 
@@ -278,6 +446,7 @@ p{
     text-align:center;
 
     transition:.25s;
+    
 
 }
 
@@ -407,6 +576,22 @@ table{
 
 }
 
+/* =========================================================
+    CODE BLOCKS
+========================================================== */
+
+[data-testid="stCode"],
+[data-testid="stCode"] pre,
+[data-testid="stCode"] code{
+
+     background:var(--card) !important;
+
+     color:var(--text) !important;
+
+     border-color:var(--border) !important;
+
+}
+
 /* ==========================================================
    IMAGES
 ========================================================== */
@@ -483,4 +668,17 @@ a:hover{
 
     color:var(--primary-hover);
 
+}
+/* Hide Streamlit header */
+header[data-testid="stHeader"] {
+    display: none;
+}
+
+/* Remove top spacing left by the header */
+[data-testid="stAppViewContainer"] {
+    margin-top: 0;
+}
+
+[data-testid="stMain"] {
+    padding-top: 0;
 }

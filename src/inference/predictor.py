@@ -47,7 +47,8 @@ class FlightPredictor:
 
         self.model = joblib.load(self.model_path)
 
-        print(f"Loaded : {self.model_path}")
+        if hasattr(self.model, "n_jobs"):
+            self.model.set_params(n_jobs=1)
 
     # =========================================================
     # LOAD PREPROCESSOR
@@ -59,25 +60,6 @@ class FlightPredictor:
             self.preprocessor_path
         )
 
-        print(f"Loaded : {self.preprocessor_path}")
-        print("=" * 80)
-        print("EXPECTED FEATURES")
-        print("=" * 80)
-
-        for column in self.preprocessor.feature_names_in_:
-            print(column)
-
-        print("=" * 80)
-
-
-        print("=" * 60)
-        print("PREPROCESSOR EXPECTS")
-        print("=" * 60)
-
-        print(list(self.preprocessor.feature_names_in_))
-
-        print("=" * 60)
-
 
     # =========================================================
     # PREPROCESS INPUT
@@ -88,25 +70,11 @@ class FlightPredictor:
         input_df: pd.DataFrame
     ):
 
-        print("=" * 60)
-        print("INPUT DATAFRAME")
-        print("=" * 60)
-
-        print(input_df)
-
-        print()
-
-        print(input_df.columns.tolist())
-
-        # Temporary fix
         input_df = input_df.copy()
 
-        input_df["DIVERTED"] = 0
-        input_df["CANCELLED"] = 0
-
-        print()
-        print("AFTER ADDING")
-        print(input_df.columns.tolist())
+        for column in ("DIVERTED", "CANCELLED"):
+            if column not in input_df.columns:
+                input_df[column] = 0
 
         return self.preprocessor.transform(input_df)
     # =========================================================

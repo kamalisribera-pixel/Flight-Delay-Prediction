@@ -16,13 +16,37 @@ st.set_page_config(
 )
 
 # =========================================================
+# LOAD CSS
+# =========================================================
+
+def load_css():
+
+    css_file = (
+        Path(__file__).resolve().parents[1]
+        / "assets"
+        / "style.css"
+    )
+
+    with open(css_file, encoding="utf-8") as f:
+
+        st.markdown(
+            f"<style>{f.read()}</style>",
+            unsafe_allow_html=True
+        )
+
+
+load_css()
+
+# =========================================================
 # DATABASE
 # =========================================================
 
 db = FlightDatabase()
 db.connect()
 
-history = db.get_prediction_history()
+history = pd.DataFrame(
+    [dict(row) for row in db.get_predictions()]
+)
 
 db.close()
 
@@ -179,11 +203,11 @@ if search:
 
 display = filtered.copy()
 
-display["Prediction"] = display["Prediction"].replace({
+display["prediction"] = display["prediction"].map({
 
-    "Delayed": "🔴 Delayed",
+    1: "🔴 Delayed",
 
-    "On Time": "🟢 On Time"
+    0: "🟢 On Time"
 
 })
 
@@ -213,29 +237,11 @@ display = display.rename(
 
 )
 
-st.dataframe(
+st.table(
 
     display,
 
-    use_container_width=True,
-
-    hide_index=True
-
-)
-
-# =========================================================
-# TABLE
-# =========================================================
-
-st.subheader("Prediction Records")
-
-st.dataframe(
-
-    filtered,
-
-    use_container_width=True,
-
-    hide_index=True
+    border=True
 
 )
 

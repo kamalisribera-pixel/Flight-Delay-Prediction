@@ -1,5 +1,4 @@
 from datetime import datetime
-from pyexpat import features
 
 from src.database.database import FlightDatabase
 from src.inference.feature_builder import FlightFeatureBuilder
@@ -52,8 +51,6 @@ class PredictService:
         # -----------------------------------------------------
         # MODEL PREDICTION
         # -----------------------------------------------------
-        print(type(features))
-        print(features)
         result = self.predictor.predict(
             features
         )
@@ -153,11 +150,4 @@ class PredictService:
 
     def close(self):
 
-        if self.cursor is not None:
-            self.cursor.close()
-
-        if self.connection is not None:
-            self.connection.close()
-
-        self.cursor = None
-        self.connection = None
+        self.builder.close()
